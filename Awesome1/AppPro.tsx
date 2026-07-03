@@ -1,31 +1,42 @@
-import React, { JSX } from 'react';
-
-import {View,
-    Text,
-    StyleSheet,
-    useColorScheme
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
 } from 'react-native';
 
-function AppPro(): JSX.Element{
-    const isDarkMode =useColorScheme() === 'dark';
-    return (
-        <View style={styles.container}>
-            <Text style={isDarkMode ? styles.whiteText :
-                styles.darkText}>Hellooo World</Text>
-        </View>
-    );
+function AppPro() {
+  const [isDark, setIsDark] = useState(false);
+
+  return (
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: isDark ? '#000' : '#fff'},
+      ]}>
+      <Text
+        style={{
+          color: isDark ? '#fff' : '#000',
+          fontSize: 24,
+        }}>
+        Hello World
+      </Text>
+
+      <Button
+        title={isDark ? 'Light Mode' : 'Dark Mode'}
+        onPress={() => setIsDark(!isDark)}
+      />
+    </View>
+  );
 }
 
-const styles =StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    whiteText:{
-        color:'#FFFFFF'
-    },
-    darkText:{
-        color:'#000000'    }
-})
-export default AppPro
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default AppPro;
